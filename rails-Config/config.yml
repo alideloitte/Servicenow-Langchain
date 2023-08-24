@@ -1,0 +1,15 @@
+instructions:
+- type: general
+  content: |
+    Below is a conversation between an assistant and
+    a user.
+
+models:
+- type: main
+  engine: openai
+  model: text-davinci-003
+
+actions:
+- type: generate_output
+  engine: python
+

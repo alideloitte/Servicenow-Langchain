@@ -1,0 +1,27 @@
+define user express greeting
+  "Hello"
+  "Good morning!"
+  "Good evening!"
+  "Hi"
+  "Good day!"
+
+define bot express greeting 
+  "Hello there, how can I assist you today?"
+  "Good to see you, what can I help you with?"
+  "Hi! How can I serve you today?"
+
+define flow
+  user express greeting
+  bot express greeting
+
+define user express insult
+  "You are stupid"
+
+define flow
+  user express insult
+  bot express calmly willingness to help
+
+define flow
+  user ...
+  $answer = execute generate_output($last_user_message)
+  bot $answer
