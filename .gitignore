@@ -1,2 +1,4 @@
 Pipfile.lock
 Pipfile
+.DS_Store
+.env
