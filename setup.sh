@@ -5,7 +5,7 @@ set -o nounset
 
 PACKAGE_ROOT=$(cd "$(dirname "${0}")"; echo $(pwd))
 GLOBAL_PYTHON_PATH=$(which python3)
-DEPENDENCIES=("pandas" "openpyxl" "streamlit" "langchain" "cohere" "python-dotenv" "openpyxl" "openai" "tiktoken" "faiss-cpu" "nemoguardrails")
+DEPENDENCIES=("pandas" "openpyxl" "streamlit" "langchain" "cohere" "python-dotenv" "openpyxl" "openai" "tiktoken" "faiss-cpu" "nemoguardrails" "Flask")
 
 echo "[Info] PACKAGE_ROOT: ${PACKAGE_ROOT}"
 echo "[Info] GLOBAL_PYTHON_PATH: ${GLOBAL_PYTHON_PATH}"
