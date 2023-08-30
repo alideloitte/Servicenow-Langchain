@@ -129,3 +129,6 @@ def api():
 
 if __name__ == '__main__':
   flask_app.run(host='0.0.0.0', port=105, debug=True) #debug=False for production
+else:    
+    # mode for running the app in production     
+   application = flask_app           
