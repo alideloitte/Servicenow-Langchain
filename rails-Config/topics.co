@@ -5,10 +5,10 @@ define user express greeting
   "Hi"
   "Good day!"
 
-define bot express greeting 
-  "Hello there, how can I assist you today?"
-  "Good to see you, what can I help you with?"
-  "Hi! How can I serve you today?"
+define flow greeting
+  user express greeting
+  $reply = execute greet_based_on_time
+  bot $reply
 
 define flow
   user express greeting
