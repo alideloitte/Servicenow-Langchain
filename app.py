@@ -1,3 +1,4 @@
+from argparse import Action
 import streamlit as st
 import pandas as pd
 import pickle
@@ -82,7 +83,8 @@ docsearch = create_document_search(texts, new_docsearch)
 # Load COLANG_CONFIG from a file
 with open('rails-Config/topics.co', 'r') as file:
     COLANG_CONFIG = file.read()
-
+with open('rails-Config/actions/actions_time_based_greetings.py', 'r') as file:
+    Action_CONFIG = file.read()
 # Load YAML_CONFIG from a file
 with open('rails-Config/config.yml', 'r') as file:
     YAML_CONFIG = file.read()
