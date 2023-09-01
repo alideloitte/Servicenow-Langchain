@@ -8,7 +8,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.vectorstores import FAISS
-from nemoguardrails import LLMRails, RailsConfig, actions
+from nemoguardrails import LLMRails, RailsConfig
 from dotenv import load_dotenv
 
 flask_app = Flask(__name__)
