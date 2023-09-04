@@ -3,8 +3,6 @@ openpyxl
 streamlit 
 langchain
 cohere
-python-dotenv
-openpyxl
 openai
 tiktoken
 faiss-cpu
