@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import pandas as pd
 import pickle
-import os
 import logging
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.text_splitter import CharacterTextSplitter
@@ -9,12 +8,11 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.llms import OpenAI
 from langchain.vectorstores import FAISS
 from nemoguardrails import LLMRails, RailsConfig
-from dotenv import load_dotenv
+import os
+import openai
 
+openai.api_key = os.environ["OPENAI_API_KEY"]
 flask_app = Flask(__name__)
-
-# Load .env file
-load_dotenv()
 
 # Load and preprocess data
 def load_and_preprocessing(file_path):
