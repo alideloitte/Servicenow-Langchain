@@ -1,3 +1,4 @@
+from argparse import Action
 import streamlit as st
 import pandas as pd
 import pickle
@@ -82,10 +83,11 @@ docsearch = create_document_search(texts, new_docsearch)
 # Load COLANG_CONFIG from a file
 with open('rails-Config/topics.co', 'r') as file:
     COLANG_CONFIG = file.read()
-
 # Load YAML_CONFIG from a file
 with open('rails-Config/config.yml', 'r') as file:
     YAML_CONFIG = file.read()
+
+
 
 config = RailsConfig.from_content(COLANG_CONFIG, YAML_CONFIG)
 app = LLMRails(config)
