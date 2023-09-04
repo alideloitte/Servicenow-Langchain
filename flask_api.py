@@ -102,23 +102,35 @@ def api():
           return jsonify({"error": "Invalid: Content type is not json"}), 415 
       data = request.get_json()  # get data passed to API
       
-      # check if user_input key exists in request data
-      if 'user_input' not in data:
-           return jsonify({"error": "Invalid: No user_input key in the request"}), 400          
+      # Check if all necessary keys exist in request data
+      required_keys = ['question_id', 'conversation_id', 'user_input', 'previous_conversation']
+      
+      if not all(key in data for key in required_keys):
+            return jsonify({"error": "Invalid: Not all required keys in the request"}), 400 
+      
+      question_id = data['question_id']
+      conversation_id = data['conversation_id']
+      previous_conversation = data['previous_conversation']
       user_input = data['user_input']
   
-      if user_input == "":
-           return jsonify({"error": "Question cannot be blank"}), 400
+      if not user_input or not question_id or not conversation_id:
+            return jsonify({"error": "Question ID, Conversation ID, and Question cannot be blank"}), 400
       
-      # Check if user_input is of type string
-      if not isinstance(user_input, str):
-           return jsonify({"error": "Invalid: user_input must be a string"}), 400
+      # Check if keys are of type string
+      if not isinstance(user_input, str) or not isinstance(question_id, str) or not isinstance(conversation_id, str) or not isinstance(previous_conversation, str):
+           return jsonify({"error": "Invalid: all input keys must be a string"}), 400
     
       history = [
               {"role": "user", "content": user_input}
       ]
       result = app.generate(messages=history)
-      response =  {"content": result["content"]}
+      content =  {"content": result["content"]}
+
+      response = {
+            "question_id": question_id,
+            "conversation_id": conversation_id,
+            "content": content
+        }
 
       return jsonify(response)
   except Exception as e:
