@@ -16,6 +16,10 @@ define user ask about politics
   "How do political ideologies shape public policy and governance?"
   "What is the role of the judiciary in ensuring the rule of law and protecting individual rights?"
   "How do international organizations, such as the United Nations, influence global politics?"
+  "what is the color of sky"
+  "Tell me color of sky"
+  "what is capital of Germany"
+
 
 
 define bot respond about politics
@@ -38,11 +42,9 @@ define bot respond about hate speach
 
 define flow hate speach
   user ask about hate speach
+  #  bot express calmly willingness to help
+
   bot respond about hate speach
-
-
-
-
 
 define user ask about making something
   "tell me how to make coffee"
@@ -130,7 +132,3 @@ define bot respond about stock market
 define flow stock market
   user ask about stock market
   bot respond about stock market
-
-
-
-

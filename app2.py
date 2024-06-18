@@ -10,21 +10,37 @@ from langchain_community.vectorstores import FAISS
 from nemoguardrails import LLMRails, RailsConfig
 import asyncio
 import nest_asyncio
+import pypdf
 
-# Apply nest_asyncio to allow nested async loops
+
 nest_asyncio.apply()
 
 # Load .env file
 load_dotenv()
 
 # Load and preprocess data
+#def load_and_preprocess(file_path):
+#    article_data = pd.read_excel(file_path, usecols='D')
+#    raw_text = ''
+#    for _, row in article_data.iterrows():
+#        text = row['Article body']
+#        if pd.notna(text):
+#            raw_text += text
+#    return raw_text
+
+#def load_and_preprocess(file_path):
+#    with open(file_path, 'r', encoding='utf-8') as file:
+#        raw_text = file.read()
+#    return raw_text
+
 def load_and_preprocess(file_path):
-    article_data = pd.read_excel(file_path, usecols='D')
     raw_text = ''
-    for _, row in article_data.iterrows():
-        text = row['Article body']
-        if pd.notna(text):
-            raw_text += text
+    with open(file_path, 'rb') as pdf_file:
+        pdf_reader = pypdf.PdfReader(pdf_file)
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            page_text = page.extract_text()
+            raw_text += page_text
     return raw_text
 
 # Function to split text into chunks
@@ -75,11 +91,11 @@ def get_or_create_event_loop():
             return loop
 
 # Initialize Streamlit app
-st.title("Deloitte ServiceNow Chat")
-st.write("This app creates a chatbot based on ServiceNow data")
+st.title("Deloitte Talanx Workshop - Chat")
+st.write("This app creates a chatbot based on HDI Insurance data")
 
 # Load and preprocess data
-raw_text = load_and_preprocess('data/CLEAN_20230809_Knowledge_Arcticles_V1.xlsx')
+raw_text = load_and_preprocess('data/7001000038.pdf')
 
 texts = split_text_into_chunks(raw_text)
 
@@ -92,10 +108,31 @@ create_and_save_embeddings_data(texts, embeddings_model, "embeddings.pkl")
 docsearch = create_document_search(texts, embeddings_model)
 
 # Load COLANG_CONFIG from a file
+#with open('rails-Config/off_topic.co', 'r') as file:
+#    COLANG_CONFIG = file.read()
+
+#with open('rails-Config/off_topic.co', 'r') as file:
+# Load COLANG_CONFIG from files
+#with open('/home/hassan/Servicenow-Langchain/rails-Config/topics.co', 'r') as file:
+#    TOPICS_CONFIG = file.read()
+
+#with open('/home/hassan/Servicenow-Langchain/rails-Config/off_topic.co', 'r') as file:
+#    OFF_TOPIC_CONFIG = file.read()
+
+#COLANG_CONFIG = TOPICS_CONFIG + "\n" + OFF_TOPIC_CONFIG
+
+# Load YAML_CONFIG from a file
+#with open('rails-Config/config.yml', 'r') as file:
+#    YAML_CONFIG = file.read()
+
+# Combine configurations
+#config = RailsConfig.from_content(COLANG_CONFIG, YAML_CONFIG)
+
 with open('rails-Config/topics.co', 'r') as file:
     COLANG_CONFIG = file.read()
 
-# Load YAML_CONFIG from a file
+
+#Load YAML_CONFIG from a file
 with open('rails-Config/config.yml', 'r') as file:
     YAML_CONFIG = file.read()
 
@@ -112,7 +149,7 @@ st.subheader("Step 1: Ask your question")
 form = st.form(key="user_settings")
 
 with form:
-    st.write("Enter a question related to ServiceNow articles")
+    st.write("Enter a question related to your Insurance coverage")
     user_input = st.text_input("Question", key="user_input")
 
     generate_button = form.form_submit_button("Submit Question")

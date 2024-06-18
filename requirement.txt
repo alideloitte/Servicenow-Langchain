@@ -8,3 +8,5 @@ tiktoken
 faiss-cpu
 nemoguardrails
 Flask
+langchain-openai
+pypdf

@@ -3,7 +3,6 @@ from nemoguardrails.actions import action
 import re
 from typing import Optional
 
-
 @action(name="greet_based_on_time")
 async def greet_based_on_time(
     context: Optional[dict] = None,

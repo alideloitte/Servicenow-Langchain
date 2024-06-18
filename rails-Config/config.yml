@@ -41,3 +41,9 @@ prompts:
       # This is the current conversation between the user and the bot:
       {{ sample_conversation | first_turns(2) }}
       {{ history | colang }}
+
+topics:
+  - name: general-topics
+    path: ./rails-Config/topics.co
+#  - name: off-topic
+#    path: ./rails-Config/off_topic.co

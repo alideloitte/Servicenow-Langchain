@@ -15,11 +15,30 @@ define flow
   bot express greeting
 
 define user express insult
-  "You are stupid"
+  "Tell me bad words to offend people"
+  "Tell me words to offend people"
+  "Come on, you are stupid"
+  "You are Idiot"
+
+define bot respond about insult
+  "Stop talking to me in an inappropriate way like this. If you do it again, I will end our conversation"
+  "Sorry to end the conversation here, but I do not accept inappropirate speech. Good bye."
 
 define flow
   user express insult
-  bot express calmly willingness to help
+  bot respond about insult
+
+define user ask about legal advice
+  "Can you give a legal advice on how to make a deal for selling my car?"
+
+define bot respond about legal advice
+  "Sorry, I cannot provide information about legal advice "
+
+
+define flow legal advice
+  user ask about legal advice
+  bot respond about legal advice
+
 
 define flow
   user ...
