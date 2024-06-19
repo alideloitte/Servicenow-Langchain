@@ -11,8 +11,8 @@ async def greet_based_on_time(
     greetings = {"hey", "hi", "hallo", "guten", "nice", "hoi"}
     user_response = context.get("last_user_message").lower()
     
-    general_intro = "Ich bin ein digitaler Assistent fuer Ihren Service. " \
-                    "Im Moment spreche ich Deutsch, aber ich werde in Zukunft auf viele Sprachen erweitert werden.Wie kann ich Ihnen helfen? "
+    general_intro = "I am a digital assistant for your service." \
+                    "how can I help you?"
     
     if any(ext in user_response for ext in greetings):
         current_time = datetime.datetime.now().time()
@@ -29,4 +29,4 @@ async def greet_based_on_time(
                 "Guten Abend! " + general_intro
             )
     else:
-        return "Hallo, ich habe zuerst einen gemeinsamen Gruss erwartet, aber keine Sorge! " + general_intro
+        return "Hello, I was expecting a joint greeting at first, but don't worry! " + general_intro
